@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik-django-forward-auth
+  labels:
+    app: traefik-django-forward-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik-django-forward-auth
+  template:
+    metadata:
+      labels:
+        app: traefik-django-forward-auth
+    spec:
+      containers:
+        - image: gabrielmilan/traefik-django-forward-auth:v0.0.5
+          name: traefik-django-forward-auth
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: DJANGO_AUTH_PUBLIC_URI
+              value: "https://auth.example.com"
+            - name: COOKIE_DOMAIN
+              value: ".example.com"
+            - name: DJANGO_SUPERUSER_USERNAME
+              value: "admin"
+            - name: DJANGO_SUPERUSER_PASSWORD
+              value: "admin"
+            - name: DJANGO_SUPERUSER_EMAIL
+              value: "admin@example.com"
+            - name: DJANGO_SETTINGS_MODULE
+              value: "forward_auth.settings.prod"
+            - name: CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: traefik-django-forward-auth-config
+                  key: config.json

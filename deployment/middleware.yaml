@@ -1,0 +1,8 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: traefik-django-forward-auth
+spec:
+  forwardAuth:
+    address: http://traefik-django-forward-auth.default.svc.cluster.local/auth/
+    trustForwardHeader: true

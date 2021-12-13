@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-django-forward-auth
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`auth.example.com`)
+      kind: Rule
+      services:
+        - name: traefik-django-forward-auth
+          port: 80
+  tls:
+    secretName: auth.example.com

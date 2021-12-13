@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-django-forward-auth
+  labels:
+    app: traefik-django-forward-auth
+spec:
+  type: ClusterIP
+  selector:
+    app: traefik-django-forward-auth
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

@@ -1,0 +1,16 @@
+{
+    "secret_key": "some-random-key",
+    "debug": false,
+    "allowed_hosts": ["*"],
+    "csrf_trusted_origins": ["*"],
+    "cors_allow_all_origins": true,
+    "cors_allowed_origins": [],
+    "session_cookie_domain": ".example.com",
+    "time_zone": "America/Sao_Paulo",
+    "databases": {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": "db.sqlite3"
+        }
+    }
+}
